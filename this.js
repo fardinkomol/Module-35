@@ -1,10 +1,21 @@
+// console.log(this);
 const kodomAli = {
     name: 'Kodom Ali', 
     money: 5000,
     study: 'Math',
     subjects: ['calculus', 'algebra', 'geometry'],
     exam: function(){
+        console.log(this);
        return this.name + ' is participating in an exam';
+    },
+    examArrow: () =>{
+        console.log(this);
+    },
+    examNested: () =>{
+        const arrow = () => {
+            console.log(this);
+        }
+        arrow();
     },
     improveExam: function(subject){
         this.exam();
@@ -15,21 +26,19 @@ const kodomAli = {
         return this.money;
     }
 }
-
-const result = kodomAli.exam();
+kodomAli.exam();
 
 const badamAli = {
-    name: 'kacha badam',
+    name: 'kacha badam Ali',
     money: 8000
 }
 
-const result2 = kodomAli.exam.call(badamAli);
-// console.log(result2);
-const badamMoney = kodomAli.treatDey.call(badamAli, 400, 40);
-console.log(badamMoney);
-const badamMoney2 = kodomAli.treatDey.apply(badamAli, [1000, 100]);
-console.log(badamMoney2);
+badamAli.exam = kodomAli.exam;
+badamAli.exam();
 
-const badamAliTreat = kodomAli.treatDey.bind(badamAli);
-const remaining = badamAliTreat(1000, 100)
-console.log(remaining);
+function clickHandler(){
+    console.log('inside click handler', this);
+}
+document.getElementById('btn-click2').addEventListener('click', function(){
+    console.log(this);
+})
